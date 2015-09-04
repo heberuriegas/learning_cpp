@@ -9,7 +9,11 @@ namespace heber {
 
     // Constructors
     template <class T>
-    Duracell<T>::Duracell() {}
+    Duracell<T>::Duracell() {
+        this->heap_size = 0;
+        this->heap = 0;
+        this->position = 0;
+    }
 
     template <class T>
     Duracell<T>::Duracell(int n){
