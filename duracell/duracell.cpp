@@ -4,7 +4,7 @@ namespace heber {
 
     // Exception
     const char* DuracellException::what() const throw() {
-        return "The heap was oversized.";
+        return "Something went wrong.";
     }
 
     // Constructors
@@ -14,7 +14,7 @@ namespace heber {
     template <class T>
     Duracell<T>::Duracell(int n){
         this->heap_size = n;
-        this->heap = new T [n];
+        this->heap = new T [this->heap_size];
         this->position = 0;
     }
 
@@ -37,7 +37,11 @@ namespace heber {
     Duracell<T>& Duracell<T>::operator= (const Duracell<T>& x) {
         this->position = x.position;
         this->heap_size = x.heap_size;
-        for(int i = 0; i < x.position; i++) {
+
+        delete[] this->heap;
+        this->heap = new T [this->heap_size];
+
+        for(int i = 0; i < this->position; i++) {
             this->heap[i] = x.heap[i];
         }
 
